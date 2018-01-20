@@ -30,7 +30,7 @@ public class Road {
         }
 
         // cars move into the road all the time
-        cars.enqueue();
+        cars.enqueue(new Car());
 
         // take one car out only if secondsSinceGreen >= 1
         if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceGreen >= 1) {

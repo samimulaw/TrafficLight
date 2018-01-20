@@ -16,8 +16,9 @@ public class Test {
         for (int i = 0; i < 20; i++) {
 
             weaverRoad.moveOneSecond();
-
+            System.out.print(" "+weaverRoad.cars.count() + " ");
             snellRoad.moveOneSecond();
+            System.out.println(snellRoad.cars.count());
         }
     }
 }
