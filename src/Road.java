@@ -4,7 +4,7 @@ public class Road {
 
     Queueable<Car> cars;
 
-    private int secondsSinceGreen = 0;
+    private int secondsSinceChange = 0;
 
     public Road(Queueable cars) {
         this.cars = cars;
@@ -22,18 +22,21 @@ public class Road {
 
     public void moveOneSecond() {
 
-        secondsSinceGreen += 1;
+        secondsSinceChange += 1;
 
-        if(secondsSinceGreen == 3) {
-            this.trafficLightColor = TrafficLightColor.RED;
-            secondsSinceGreen = 0;
+        if(trafficLightColor == TrafficLightColor.RED && secondsSinceChange == 5 ||
+                trafficLightColor == TrafficLightColor.GREEN && secondsSinceChange == 4) {
+
+            trafficLightColor = trafficLightColor == TrafficLightColor.GREEN ? TrafficLightColor.RED : TrafficLightColor.GREEN;
+
+            secondsSinceChange = 0;
         }
 
         // cars move into the road all the time
         cars.enqueue(new Car());
 
-        // take one car out only if secondsSinceGreen >= 1
-        if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceGreen >= 1) {
+        // take one car out only if secondsSinceChange >= 1
+        if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceChange >= 1) {
             cars.dequeue();
         }
     }
