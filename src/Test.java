@@ -12,20 +12,20 @@ public class Test {
 
         weaverRoad.turnLightRed();
 
-        System.out.println("0. S = 0; N = 0; E = 0; W = 0");
+        System.out.println(" 0. S =  0; N =  0; E =  0; W =  0");
 
         // For each seconds until twenty
         for (int i = 0; i < 20; i++) {
 
-            System.out.print(i + 1 + ". ");
+            System.out.printf("%2d. ", i + 1);
 
             snellRoad.moveOneSecond();
 
-            System.out.print("S = " + snellRoad.cars.count() + "; N = " + snellRoad.cars.count());
+            System.out.printf("S = %2d; N = %2d;", snellRoad.cars.count(), snellRoad.cars.count());
 
             weaverRoad.moveOneSecond();
 
-            System.out.println(" E  = " + weaverRoad.cars.count() + "; W = " + weaverRoad.cars.count());
+            System.out.printf(" E = %2d; w = %2d\n", weaverRoad.cars.count(), weaverRoad.cars.count());
         }
     }
 }

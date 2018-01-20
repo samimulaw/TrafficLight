@@ -25,7 +25,7 @@ public class Road {
         secondsSinceChange += 1;
 
         if(trafficLightColor == TrafficLightColor.RED && secondsSinceChange == 5 ||
-                trafficLightColor == TrafficLightColor.GREEN && secondsSinceChange == 4) {
+                trafficLightColor == TrafficLightColor.GREEN && secondsSinceChange == 3) {
 
             trafficLightColor = trafficLightColor == TrafficLightColor.GREEN ? TrafficLightColor.RED : TrafficLightColor.GREEN;
 
