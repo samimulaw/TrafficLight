@@ -4,7 +4,7 @@ public interface Queueable<T> {
 
     public int count();
 
-    public void enqueue(T e);
+    public void enqueue(T node);
 
     public void dequeue();
 }
