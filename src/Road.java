@@ -14,6 +14,8 @@ public class Road {
 
     public void turnLightGreen() {
         this.trafficLightColor = TrafficLightColor.GREEN;
+        secondsSinceGreen=1;
+        
     }
 
     public void turnLightRed() {
@@ -22,10 +24,14 @@ public class Road {
 
     public void moveOneSecond() {
 
-        secondsSinceGreen += 1;
+    	secondsSinceGreen += 1;
 
         if(secondsSinceGreen == 3) {
-            this.trafficLightColor = TrafficLightColor.RED;
+        	if(this.trafficLightColor==TrafficLightColor.GREEN)
+        		this.trafficLightColor = TrafficLightColor.RED;
+        	else 
+        		this.trafficLightColor = TrafficLightColor.GREEN;
+        	
             secondsSinceGreen = 0;
         }
 
@@ -36,5 +42,7 @@ public class Road {
         if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceGreen >= 1) {
             cars.dequeue();
         }
+        
+        
     }
 }
