@@ -4,28 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 // implement the methods in this class
-public class Queue<T> implements Queueable {
-	List<T> vehecles= new ArrayList<T>();
-    public Queue() {
+public class Queue<T> implements Queueable<T> {
+
+	private List<T> nodes = new ArrayList<>();
+
+	public Queue() {
         // instantiate this queue with a list of items
-    	
-    	
     }
 
     @Override
     public int count() {
-    return vehecles.size();
+    return nodes.size();
     }
 
     @Override
-    public void enqueue(Object c) {
-        // Enqueue an item into the queue by creating object of type T
-    	vehecles.add((T) c);
+    public void enqueue(T node) {
+        nodes.add(node);
     }
 
     @Override
     public void dequeue() {
-    	vehecles.remove(0);
+    	nodes.remove(0);
     }
 
     private class Node {

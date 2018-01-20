@@ -4,9 +4,13 @@ public class Road {
 
     Queueable<Car> cars;
 
-    private int secondsSinceChange = 0;
+    public int sinceGreen = 0;
 
-    public Road(Queueable cars) {
+    public int sinceRed = 0;
+
+    private boolean justStarting = true;
+
+    public Road(Queueable<Car> cars) {
         this.cars = cars;
     }
 
@@ -14,32 +18,46 @@ public class Road {
 
     public void turnLightGreen() {
         this.trafficLightColor = TrafficLightColor.GREEN;
+        sinceGreen = 0;
     }
 
     public void turnLightRed() {
         this.trafficLightColor = TrafficLightColor.RED;
+        sinceRed = 0;
     }
 
     public void moveOneSecond() {
 
-        secondsSinceChange += 1;
-
-        if(trafficLightColor == TrafficLightColor.RED && secondsSinceChange == 5 ||
-                trafficLightColor == TrafficLightColor.GREEN && secondsSinceChange == 3) {
-
-            trafficLightColor = trafficLightColor == TrafficLightColor.GREEN ? TrafficLightColor.RED : TrafficLightColor.GREEN;
-
-            secondsSinceChange = 0;
-        }
-
-        // cars move into the road all the time
         cars.enqueue(new Car());
 
-        // take one car out only if secondsSinceChange >= 1
-        if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceChange >= 1) {
+        if(trafficLightColor == TrafficLightColor.GREEN && (sinceGreen > 0 || justStarting)) {
+
             cars.dequeue();
+
+            justStarting = false;
         }
-        
-        
+
+        if(trafficLightColor == TrafficLightColor.GREEN) {
+
+            sinceGreen++;
+
+            if(sinceGreen > 2) {
+
+                turnLightRed();
+            }
+
+        } else {
+
+            sinceRed++;
+
+            if(sinceRed > 4) {
+
+                turnLightGreen();
+            }
+        }
+    }
+
+    public TrafficLightColor getTrafficLightColor() {
+        return trafficLightColor;
     }
 }
