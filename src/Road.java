@@ -39,5 +39,7 @@ public class Road {
         if(this.trafficLightColor == TrafficLightColor.GREEN && this.secondsSinceChange >= 1) {
             cars.dequeue();
         }
+        
+        
     }
 }
