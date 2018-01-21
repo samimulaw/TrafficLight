@@ -2,15 +2,15 @@ import lib.Queueable;
 
 public class Road {
 
-    Queueable<Car> cars;
+    public Queueable<Car> cars;
 
     public int sinceGreen = 0;
 
     public int sinceRed = 0;
 
-    private boolean justStarting = true;
+    public boolean turnedRed = false;
 
-    public Road(Queueable<Car> cars) {
+    Road(Queueable<Car> cars) {
         this.cars = cars;
     }
 
@@ -24,36 +24,26 @@ public class Road {
     public void turnLightRed() {
         this.trafficLightColor = TrafficLightColor.RED;
         sinceRed = 0;
+        turnedRed = true;
     }
 
     public void moveOneSecond() {
-
         cars.enqueue(new Car());
+        if (trafficLightColor == TrafficLightColor.GREEN && sinceGreen > 2) {
+            turnLightRed();
+        }
 
-        if(trafficLightColor == TrafficLightColor.GREEN && (sinceGreen > 0 || justStarting)) {
-
-            cars.dequeue();
-
-            justStarting = false;
+        if (trafficLightColor == TrafficLightColor.RED && sinceRed > 4) {
+            turnLightGreen();
         }
 
         if(trafficLightColor == TrafficLightColor.GREEN) {
-
+            if(sinceGreen > 0 || sinceRed == 0) { // sinceRed == 0 test if the car has never been red so far. The green light is just beginning
+                cars.dequeue();
+            }
             sinceGreen++;
-
-            if(sinceGreen > 2) {
-
-                turnLightRed();
-            }
-
         } else {
-
             sinceRed++;
-
-            if(sinceRed > 4) {
-
-                turnLightGreen();
-            }
         }
     }
 

@@ -14,6 +14,8 @@ public class Test {
 
         System.out.printf("%2d. S = %2d; N = %2d; E = %2d; W = %2d\n", 0, 0, 0, 0, 0);
 
+        weaverRoad.sinceRed = 1;
+
         // For each seconds until twenty
         for (int i = 1; i <= 20; i++) {
 

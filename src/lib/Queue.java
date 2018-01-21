@@ -26,9 +26,4 @@ public class Queue<T> implements Queueable<T> {
     public void dequeue() {
     	nodes.remove(0);
     }
-
-    private class Node {
-        private T item;
-        private Node next;
-    }
 }
